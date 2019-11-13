@@ -7,17 +7,17 @@
             <i class="mdi mdi-account text-warning icon-lg"></i>
           </div>
           <div class="float-right">
-            <p class="mb-0 text-right">Total Warga</p>
+            <p class="mb-0 text-right">Total RAB dan Nota Dinas</p>
             <div class="fluid-container">
-              <h3 class="font-weight-medium text-right mb-0"><?= $dashboardktp['jumktp'] ?></h3>
+              <h3 class="font-weight-medium text-right mb-0"><?= $dashboardrnd['jumrnd'] ?></h3>
             </div>
           </div>
         </div>
         <p class="text-muted mt-3 mb-0 m-0">
-          <i class="mdi mdi-gender-male mr-1" aria-hidden="true"></i>AK Laki - laki <span class="float-right"><?= $dashboardktp['jumlakilaki'] ?> </span>
+          <i class="mdi mdi-gender-male mr-1" aria-hidden="true"></i>RND lengkap <span class="float-right"><?= $dashboardrnd['jumya'] ?> </span>
         </p>
         <p class="text-muted mt-3 mb-0 m-0">
-          <i class="mdi mdi-gender-female mr-1" aria-hidden="true"></i>AK Perempuan <span class="float-right"><?= $dashboardktp['jumperempuan'] ?> </span>
+          <i class="mdi mdi-gender-female mr-1" aria-hidden="true"></i>RND belum lengkap <span class="float-right"><?= $dashboardrnd['jumtidak'] ?> </span>
         </p>
       </div>
     </div>
@@ -27,12 +27,12 @@
       <div class="card-body">
         <div class="clearfix">
           <div class="float-left">
-            <i class="mdi mdi-account-multiple text-danger icon-lg"></i>
+            <i class="mdi mdi-scale-balance text-danger icon-lg"></i>
           </div>
           <div class="float-right">
-            <p class="mb-0 text-right">Total Kepala Keluarga</p>
+            <p class="mb-0 text-right">Total Saldo</p>
             <div class="fluid-container">
-              <h3 class="font-weight-medium text-right mb-0"><?= $dashboardkk ?></h3>
+              <h3 class="font-weight-medium text-right mb-0"><?= $saldo ?></h3>
             </div>
           </div>
         </div>
@@ -76,39 +76,4 @@
       </div>
     </div>
   </div> -->
-</div>
-
-
-<!-- ----------------------------------------------------------------------- -->
-<div class="row">
-  <div class="col-lg-12 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-header bg-success text-white pb-0">
-        <h5><strong>Grafik Jumlah KK per RW</strong></h5>
-      </div>
-      <div class="card-body">
-        <?php $chart::bar('Data KK per RW',$datachart['labelrt'], $datachart['nilairt']) ?>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-6 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-header bg-success text-white pb-0">
-        <h5><strong>Grafik Status Perkawinan</strong></h5>
-      </div>
-      <div class="card-body">
-       <?php $chart::pie('Data Perkawinan',$datachart['labelkw'], $datachart['nilaikw']) ?>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-6 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-header bg-success text-white pb-0">
-        <h5><strong>Grafik Jenis Kelamin</strong></h5>
-      </div>
-      <div class="card-body">
-        <?php $chart::pie('Data Jenis Kelamin',$datachart['labeljk'], $datachart['nilaijk']) ?>
-      </div>
-    </div>
-  </div>
 </div>

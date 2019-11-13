@@ -15,19 +15,26 @@ namespace app\Models;
 
 use app\Core\ModelClass;
 
-class Kk extends ModelClass
+class Prk extends ModelClass
 {	
-	private $kk 	= 'kk';
+	private $prk 	= 'prk';
 
 	function __construct()
 	{
 		parent::__construct();
-		$this->_db->table($this->kk);
+		$this->_db->table($this->prk);
 	}
 
 	public function readkk($value='')
 	{
 		return $this->_db->fetch();
+	}
+
+	public function listprksetidrnd($id_rnd)
+	{
+		$this->_db->table('detail_prk');
+		$this->_db->where("id_rnd = '$id_rnd'");
+		return $this->_db->fetch('obj');
 	}
 
 	public function readkkid($no_kk)
@@ -51,9 +58,8 @@ class Kk extends ModelClass
 		return $this->_db->insert($d);
 	}
 
-	public function jumlahkk($value='')
+	public function jumlahprk($value='')
 	{
-		$this->_db->table('kk');
 		return $this->_db->jumdata();
 	}
 

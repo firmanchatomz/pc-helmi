@@ -20,7 +20,7 @@
         <div class="row w-100">
           <div class="col-lg-4 mx-auto">
             <div class="auto-form-wrapper">
-            <h2 class="text-center">PRODESKEL</h2>
+            <h2 class="text-center">LOGIN</h2>
               <form method="post" action="<?= base_url('home/ceklogin') ?>">
                 <div class="form-group">
                   <label class="label">Username</label>

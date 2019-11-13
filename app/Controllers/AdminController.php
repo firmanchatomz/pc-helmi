@@ -30,76 +30,163 @@ class AdminController extends Controller
 	// all class use methos index for method default
 	public function index()
 	{
-		$data['dashboardktp']		= $this->model('ktp')->dashboardktp();
-		$data['dashboardkk']		= $this->model('kk')->jumlahkk();
-		$data['datachart']					= $this->model('home')->chart();
+		$data['dashboardrnd']		= $this->model('rnd')->dashboard();
+		$data['dashboarprk']		= $this->model('prk')->jumlahprk();
+		$data['saldo']		= $this->model('rnd')->sisasaldo();
+		// $data['datachart']					= $this->model('home')->chart();
 		$this->adminpage('Administrator/beranda',$data);
 	}
 
 	// --------------------------------------------------------------------
-	// fungsi KK
-	public function lihatkk($value='')
+	// fungsi RAB dan NOTA DINAS
+	public function tambahrnd($arus=null)
 	{
-		$data['kk']	= $this->model('kk')->readkk();
-		$this->adminpage('kk/lihatkk',$data);
+		$data['jenis']	= $this->model()->listdata('jenis','obj');
+		$data['prk']	= $this->model()->listdata('prk','obj');
+		$this->adminpage('rnd/tambahrnd',$data);
+	}
+	public function editrnd($id_rnd)
+	{
+		$data['jenis']	= $this->model()->listdata('jenis','obj');
+		$data['prk']	= $this->model()->listdata('prk','obj');
+		$data['dataprk']	= $this->model('prk')->listprksetidrnd($id_rnd);
+		$data['rnd']	= $this->model()->listdataid('rnd_pengadaan',$id_rnd);
+		$this->adminpage('rnd/editrnd',$data);
 	}
 
-	public function detailkk($no_kk)
+	public function updaternd($id_rnd)
 	{
-		$data['kk']	= $this->model('kk')->readkkid($no_kk);
-		$data['ktp']= $this->model('ktp')->readktpsetnokk($no_kk);
-		$this->adminpage('kk/detailkk',$data);
+		$save = $this->model('rnd')->updaternd($id_rnd);
+		$this->popup('Data berhasil diperbaharui','admin/lihatrnd');
 	}
 
-	public function tambahkk($arus=null)
+	public function simpanrnd($arus=null)
 	{
-		$this->adminpage('kk/tambahkk');
-	}
-
-	public function simpanKk($arus=null)
-	{
-		$save 	= $this->model('kk')->createkk();
+		$save 	= $this->model('rnd')->creaternd();
 		if ($save) {
-			$this->popup('Data berhasil tersimpan','admin/lihatkk');
+			$this->popup('Data berhasil tersimpan','admin/lihatrnd');
 		} else {
-			$this->popup('Data Gagal Tersimpan','admin/tambahkk');
+			$this->popup('Data Gagal Tersimpan','admin/tambahrnd');
 		}	
 	}
-
-	public function hapuskk($no_kk)
+	public function lihatrnd($value='')
 	{
-		$this->model('kk')->deletekkid($no_kk);
-		$this->popup('Data KK berhasil terhapus','admin/lihatkk');
+		$data['rnd']	= $this->model('rnd')->readrnd();
+		$this->adminpage('rnd/lihatrnd',$data);
+	}
+
+	public function detailrnd($no_rnd)
+	{
+		$data['rnd']	= $this->model('rnd')->readrndid($no_rnd);
+		$data['kontrak']= $this->model('kontrak')->readkontraksetnornd($no_rnd);
+		$this->adminpage('rnd/detailrnd',$data);
+	}
+
+
+
+	public function hapusrnd($no_rnd)
+	{
+		$this->model('rnd')->deleterndid($no_rnd);
+		$this->popup('Data rnd berhasil terhapus','admin/lihatrnd');
 	}
 
 	// -------------------------------------------------------------------
 
-	public function tambahktp($no_kk)
+	public function tambahkontrak()
 	{
-		$data['no_kk'] 	= $no_kk;
-		$this->adminpage('ktp/tambahktp',$data);
+		$data['kontrak']	= $this->model('kontrak')->readkontrakjoinrnd();
+		$data['rnd'] 	= $this->model('Rnd')->listrndkosong();
+		$this->adminpage('kontrak/tambahkontrak',$data);
+	}
+	public function editkontrak($id_kontrak)
+	{
+		$data['kontrak']	= $this->model()->listdataid('kontrak',$id_kontrak);
+		$this->adminpage('kontrak/editkontrak',$data);
+	}
+	public function lihatkontrak($value='')
+	{
+		$data['rnd'] 	= $this->model('Rnd')->listrndkosong();
+		$data['kontrak']	= $this->model('kontrak')->readkontrakjoinrnd();
+		$this->adminpage('kontrak/lihatkontrak',$data);
 	}
 
-	public function simpanktp($no_kk)
+	public function updatekontrak($id_kontrak)
 	{
-		$save = $this->model('ktp')->createktp();
+		$save = $this->model('kontrak')->updatekontrak($id_kontrak);
+		$this->popup('Data berhasil diperbaharui','admin/lihatkontrak');
+	}
+
+	public function simpankontrak()
+	{
+		$save = $this->model('kontrak')->createkontrak();
 		if ($save) {
-			$this->popup('Data berhasil tersimpan','admin/detailkk/'.$no_kk);
+			$this->popup('Data berhasil tersimpan','admin/lihatkontrak');
 		} else {
-			$this->popup('Data Gagal tersimpan','admin/tambahktp/'.$no_kk);
+			$this->popup('Data Gagal tersimpan','admin/tambahkontrak');
 		}
 	}
 
-	public function detailktp($no_nik)
+	public function detailkontrak($no_nik)
 	{
-		$data['ktp']	= $this->model('ktp')->readktpid($no_nik);
-		$this->adminpage('ktp/detailktp',$data);
+		$data['kontrak']	= $this->model('kontrak')->readkontrakid($no_nik);
+		$this->adminpage('kontrak/detailkontrak',$data);
 	}
 
-	public function hapusktp($no_kk,$no_nik)
+	public function hapuskontrak($no_rnd,$no_nik)
 	{
-		$this->model('ktp')->deletektpid($no_nik);
-		$this->popup('Data Anggota Keluarga berhasil terhapus','admin/detailkk/'.$no_kk);
+		$this->model('kontrak')->deletekontrakid($no_nik);
+		$this->popup('Data Anggota Keluarga berhasil terhapus','admin/detailrnd/'.$no_rnd);
+	}
+
+// #########################################################################
+
+
+	// -------------------------------------------------------------------
+
+	public function tambahpembayaran()
+	{
+		$data['pembayaran']	= $this->model('pembayaran')->readpembayaranjoinrnd();
+		$data['rnd'] 	= $this->model('Rnd')->listrndpembayaran();
+		$this->adminpage('pembayaran/tambahpembayaran',$data);
+	}
+	public function editpembayaran($id_pembayaran)
+	{
+		$data['pembayaran']	= $this->model()->listdataid('pembayaran',$id_pembayaran);
+		$this->adminpage('pembayaran/editpembayaran',$data);
+	}
+	public function lihatpembayaran($value='')
+	{
+		$data['rnd'] 	= $this->model('Rnd')->listrndpembayaran();
+		$data['pembayaran']	= $this->model('pembayaran')->readpembayaranjoinrnd();
+		$this->adminpage('pembayaran/lihatpembayaran',$data);
+	}
+
+	public function simpanpembayaran()
+	{
+		$save = $this->model('pembayaran')->createpembayaran();
+		if ($save) {
+			$this->popup('Data berhasil tersimpan','admin/lihatpembayaran');
+		} else {
+			$this->popup('Data Gagal tersimpan','admin/tambahpembayaran');
+		}
+	}
+
+	public function updatepembayaran($id_pembayaran)
+	{
+		$save = $this->model('pembayaran')->updatepembayaran($id_pembayaran);
+		$this->popup('Data berhasil diperbaharui','admin/lihatpembayaran');
+	}
+
+	public function detailpembayaran($no_nik)
+	{
+		$data['pembayaran']	= $this->model('pembayaran')->readpembayaranid($no_nik);
+		$this->adminpage('pembayaran/detailpembayaran',$data);
+	}
+
+	public function hapuspembayaran($no_rnd,$no_nik)
+	{
+		$this->model('kontrak')->deletekontrakid($no_nik);
+		$this->popup('Data Anggota Keluarga berhasil terhapus','admin/detailrnd/'.$no_rnd);
 	}
 
 // #########################################################################

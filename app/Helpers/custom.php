@@ -39,3 +39,14 @@ function rtrw($data)
 	}
 	return $result;
 }
+
+function cekprk($data,$id_prk)
+{
+	$result = null;
+	foreach ($data as $row) {
+		if ($row->id_prk == $id_prk) {
+			$result = 'checked';
+		}
+	}
+	return $result;
+}

@@ -5,7 +5,7 @@
         <?= show_alert() ?>
         <h4 class="card-title">Halaman Pengaturan Website</h4>
         <p class="card-description">
-          Atur Website sesuai dengan kriteria perumahan
+          Atur Website sesuai dengan kebutuhan
         </p>
         <form method="post" action="<?= base_url('admin/ubahsetting/'.$setting->id_setting) ?>" class="forms-sample" enctype="multipart/form-data">
           <input type="hidden" name="id_setting" value="<?= $setting->id_setting ?>">
@@ -16,7 +16,7 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Nama Perumahan</label>
+            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Nama Singkatan Aplikasi</label>
             <div class="col-sm-9">
               <input type="text" class="form-control" name="nama_perumahan" id="exampleInputEmail2" placeholder="masukkan nama perumahan" value="<?= $setting->nama_perumahan ?>">
             </div>
@@ -28,7 +28,7 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Logo Perumahan</label>
+            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Logo Aplikasi</label>
             <div class="col-sm-2">
               <img src="<?= base_url('assets/img/'.$setting->logo) ?>" alt="logo" width="100%">
             </div>

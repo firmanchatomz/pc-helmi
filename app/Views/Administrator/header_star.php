@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Prodeskel Desa Pelitaasih</title>
+  <title>Sistem Informasi PLN</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href=<?= base_url('theme/staradmin/vendors/iconfonts/mdi/css/materialdesignicons.min.css')?>>
   <link rel="stylesheet" href=<?= base_url('theme/staradmin/vendors/css/vendor.bundle.base.css')?>>
@@ -55,7 +55,7 @@
           <li class="nav-item dropdown d-none d-xl-inline-block">
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
               <span class="profile-text text-capitalize">Selamat Datang, <?= $admin->nama ?> !</span>
-              <img class="img-xs rounded-circle" src=<?= base_url('assets/img/profil.png')?> alt="Profile image">
+              <img class="img-xs rounded-circle" src=<?= base_url('assets/img/pln.jpg')?> alt="Profile image">
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <a class="dropdown-item p-0">
@@ -97,17 +97,17 @@
             <div class="nav-link">
               <div class="user-wrapper">
                 <div class="profile-image">
-                  <img src=<?= base_url('assets/img/profil.png')?> alt="profile image">
+                  <img src=<?= base_url('assets/img/pln.jpg')?> alt="profile image">
                 </div>
                 <div class="text-wrapper">
                   <p class="profile-name text-capitalize"><?= $admin->nama ?></p>
                   <div>
-                    <small class="designation text-muted text-uppercase"><?= $admin->level ?></small>
+                    <small class="designation text-muted text-uppercase"><?= $admin->nama_user ?></small>
                     <span class="status-indicator online"></span>
                   </div>
                 </div>
               </div>
-              <a href="<?= base_url('admin/tambahkk') ?>" class="btn btn-success btn-block">Tambah Data KK
+              <a href="<?= base_url('admin/tambahrnd') ?>" class="btn btn-success btn-block">Tambah Data RAB
                 <i class="mdi mdi-plus"></i>
               </a>
             </div>
@@ -121,32 +121,36 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="menu-icon mdi mdi-content-copy"></i>
-              <span class="menu-title">Data Penduduk</span>
+              <span class="menu-title">Data</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href=<?= base_url('admin/lihatkk')?>>Data KK</a>
+                  <a class="nav-link" href=<?= base_url('admin/lihatrnd')?>>Data Rab dan Nota Dinas</a>
+                </li>
+                 <li class="nav-item">
+                  <a class="nav-link" href=<?= base_url('admin/lihatkontrak')?>>Data Kontrak</a>
+                </li>
+                 <li class="nav-item">
+                  <a class="nav-link" href=<?= base_url('admin/lihatpembayaran')?>>Data Pembayaran</a>
                 </li>
               </ul>
             </div>
           </li>
 
-          <?php if (akses('admin')): ?>
-          <li class="nav-item">
+    <!--       <li class="nav-item">
             <a class="nav-link" href=<?= base_url('admin/lihatrw')?>>
               <i class="menu-icon mdi mdi-account-multiple"></i>
               <span class="menu-title">Data RW</span>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" href=<?= base_url('admin/setting')?>>
               <i class="menu-icon mdi mdi-settings"></i>
               <span class="menu-title">Pengaturan</span>
             </a>
           </li>
-          <?php endif ?>
         </ul>
       </nav>
       <!-- partial -->

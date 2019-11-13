@@ -15,7 +15,7 @@ namespace app\Models;
 
 use app\Core\ModelClass;
 
-class Berita extends ModelClass
+class Jenis extends ModelClass
 {
 	// format default class
 	public function listberita($value='')
@@ -37,8 +37,11 @@ class Berita extends ModelClass
 		$d['judul_berita']= $this->filter_input($_POST['judul_berita']);
 		$d['isi_berita']	= $_POST['isi_berita'];
 
-		$nama_file 				= $_FILES['gambar']['name'];
-		$lokasi 					= $_FILES['gambar']['tmp_name'];
+		$nama_file 			= $_FILES['gambar']['name'];
+		$lokasi 			= $_FILES['gambar']['tmp_name'];
+
+		// proses pengolahan gambar
+
 
 		$d['gambar']			= $nama_file;
 		move_uploaded_file($lokasi, 'assets/img/berita/'.$nama_file);

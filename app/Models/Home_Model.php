@@ -19,63 +19,60 @@ class Home extends ModelClass
 {
 	public function dataadmin()
 	{
-		if (isset($_SESSION['rw'])) {
-			$id_admin = $_SESSION['rw'];
-		} else {
-			$id_admin = $_SESSION['admin'];
-		}
+		$id_admin = $_SESSION['admin'];
 		
-		$this->_db->table('admin');
-		return $this->_db->fetchid($id_admin);
+		$this->_db->table('admin','user');
+		$this->_db->where("id_admin = '$id_admin'");
+		return $this->_db->fetchjoin('id');
 	}
 
 	public function chart($value='')
 	{
-		$this->_db->table('ktp');
-		$jumlahktp = $this->_db->jumdata();
+		// $this->_db->table('ktp');
+		// $jumlahktp = $this->_db->jumdata();
 
-		$this->_db->table('ktp');
-		$this->_db->where("jk = 'perempuan'");
-		$jumperempuan     = $this->_db->jumdata();
-		$jumlakilaki			= $jumlahktp - $jumperempuan;
-
-
-		$this->_db->table('ktp');
-		$this->_db->where(" perkawinan= 'sudah kawin'");
-		$jumkawin     = $this->_db->jumdata();
-		$jumbelumkawin= $jumlahktp - $jumkawin;
+		// $this->_db->table('ktp');
+		// $this->_db->where("jk = 'perempuan'");
+		// $jumperempuan     = $this->_db->jumdata();
+		// $jumlakilaki			= $jumlahktp - $jumperempuan;
 
 
-		$this->_db->table('kk');
-		$jumkk = $this->_db->jumdata();
+		// $this->_db->table('ktp');
+		// $this->_db->where(" perkawinan= 'sudah kawin'");
+		// $jumkawin     = $this->_db->jumdata();
+		// $jumbelumkawin= $jumlahktp - $jumkawin;
+
+
+		// $this->_db->table('kk');
+		// $jumkk = $this->_db->jumdata();
 
 		// per rt ----------------------------------------------
-		$namart 	= null;
-		$jumrt 		= null;
-		$rw 	= ['001','002','003','004','005','006','007'];
-		for ($i=0; $i < count($rw); $i++) {
-			$nort 	= $rw[$i]; 
-			$nrt 		= $i+1;
-			$this->_db->table('kk');
-			$this->_db->where("rw = '$nort'");
-			$namart .= "'RW ".$nrt."',";
-			$jumrt 	.= $this->_db->jumdata().",";
-		}
+		// $namart 	= null;
+		// $jumrt 		= null;
+		// $rw 	= ['001','002','003','004','005','006','007'];
+		// for ($i=0; $i < count($rw); $i++) {
+		// 	$nort 	= $rw[$i]; 
+		// 	$nrt 		= $i+1;
+		// 	$this->_db->table('kk');
+		// 	$this->_db->where("rw = '$nort'");
+		// 	$namart .= "'RW ".$nrt."',";
+		// 	$jumrt 	.= $this->_db->jumdata().",";
+		// }
 
-		$namart = rtrim($namart,',');
-		$jumrt = rtrim($jumrt,',');
+		// $namart = rtrim($namart,',');
+		// $jumrt = rtrim($jumrt,',');
 
 		// ------------------------------------
-		$chartjk['labelrt'] 	= $namart;
-		$chartjk['nilairt']		= $jumrt;
+		// $chartjk['labelrt'] 	= $namart;
+		// $chartjk['nilairt']		= $jumrt;
 
-		$chartjk['labeljk'] 	= "'laki-laki','perempuan'";
-		$chartjk['nilaijk']		= $jumlakilaki.','.$jumperempuan;
+		// $chartjk['labeljk'] 	= "'laki-laki','perempuan'";
+		// $chartjk['nilaijk']		= $jumlakilaki.','.$jumperempuan;
 
-		$chartjk['labelkw'] 	= "'Sudah Kawin','Belum Kawin'";
-		$chartjk['nilaikw']		= $jumkawin.','.$jumbelumkawin;
+		// $chartjk['labelkw'] 	= "'Sudah Kawin','Belum Kawin'";
+		// $chartjk['nilaikw']		= $jumkawin.','.$jumbelumkawin;
 
-		return $chartjk;
+		// return $chartjk;
 	}
 
 	public function ceklogin($value='')
