@@ -59,7 +59,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <a class="dropdown-item p-0">
-                <div class="d-flex border-bottom">
+               <!--  <div class="d-flex border-bottom">
                   <div class="py-3 px-4 d-flex align-items-center justify-content-center">
                     <i class="mdi mdi-bookmark-plus-outline mr-0 text-gray"></i>
                   </div>
@@ -69,16 +69,16 @@
                   <div class="py-3 px-4 d-flex align-items-center justify-content-center">
                     <i class="mdi mdi-alarm-check mr-0 text-gray"></i>
                   </div>
-                </div>
+                </div> -->
               </a>
-         <!--      <a class="dropdown-item">
-                Change Password
-              </a> -->
-            <!--   <a class="dropdown-item">
-                Check Inbox
-              </a> -->
+              <a class="dropdown-item">
+                Menu Admin
+              </a>
+              <a class="dropdown-item" href="<?= base_url('admin/ubahakun') ?>">
+                 <i class="menu-icon mdi mdi-account-outline"></i> Ubah Akun
+              </a>
               <a class="dropdown-item" href="<?= base_url('admin/logout') ?>">
-                Keluar
+                <i class="menu-icon mdi mdi-run-fast"></i> Keluar
               </a>
             </div>
           </li>

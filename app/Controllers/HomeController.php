@@ -30,6 +30,8 @@ class HomeController extends Controller
 
     public function login($value='')
     {
+        // echo password_hash('admin', PASSWORD_DEFAULT);
+        // die();
     	$this->view('login_star');
     }
 

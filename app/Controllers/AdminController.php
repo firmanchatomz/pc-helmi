@@ -228,8 +228,26 @@ class AdminController extends Controller
 
 	public function ubahsetting($value='')
 	{
-		$this->model('admin')->updatesetting();
+		$cek = $this->model('admin')->updatesetting();
 		$this->popup('Data setting telah diperbaharui','admin/setting');
+	}
+
+
+	public function ubahakun($value='')
+	{
+		$data['admin']		= $this->model('home')->dataadmin();
+	 	$this->adminpage('Administrator/ubahakun',$data);
+	}
+
+	public function prosesubahakun($value='')
+	{
+		$cek = $this->model('admin')->updateakun();
+		if ($cek) {
+			$this->popup('Data Akun telah diperbaharui','admin/ubahakun');
+		} else {
+			$this->popup('Maaf, password tidak sama','admin/ubahakun');
+		}
+		
 	}
 
 	// ######################################################################

@@ -58,7 +58,27 @@ class Admin extends ModelClass
 				}
 			}
 			create_alert('Berhasil','Setting sudah diperbaharui','success');
+			$this->_db->table('setting');
 			return $this->_db->update($d,$id_setting);
+	}
+
+	public function updateakun($value='')
+	{
+
+		if (isset($_POST['cek'])) {
+			// ubah password
+			$password1 		= $_POST['password1'];
+			$password2 		= $_POST['password2'];
+			if ($password1 != $password2) {
+				return false;
+			}
+			$d['password'] = password_hash($password1, PASSWORD_DEFAULT);
+		}
+		$d['nama'] 		= $_POST['nama'];
+		$d['username']	= $_POST['username'];
+		$this->_db->table('admin');
+		$this->_db->update($d,1);
+		return TRUE;
 	}
 
 	public function setfileimage($value='')
