@@ -97,9 +97,13 @@ class Admin extends ModelClass
 		$this->_db->where("status_kontrak='sudah' AND status_pembayaran='sudah' ");
 		$data = $this->_db->fetch();
 
+		$this->_db->table('saldo');
+		$saldo = $this->_db->fetch('id');
+
+		$saldo = $saldo->saldo;
 		foreach ($data as $r) {
 			$id_rnd = $r['id_rnd'];
-
+			$saldo = $saldo - $r['nilai_rab'];
 			// data kontrak
 			$this->_db->table('kontrak');
 			$this->_db->where("id_rnd='$id_rnd'");
@@ -109,23 +113,60 @@ class Admin extends ModelClass
 			$this->_db->table('pembayaran');
 			$this->_db->where("id_rnd='$id_rnd'");
 			$pembayaran = $this->_db->fetch('id');
+			$total = $pembayaran->n_100+$pembayaran->n_95+$pembayaran->n_5;
+
+			// prk
+			$this->_db->table('detail_prk');
+			$this->_db->where("id_rnd='$id_rnd'");
+			$prk = $this->_db->fetch();
+			$index = 1;
+			foreach ($prk as $p) {
+				if ($index < 6) {
+					$id_prk = $p['id_prk'];
+					$this->_db->table('prk');
+					$dprk = $this->_db->fetchid($id_prk);
+					$dd[] = $dprk->nama_prk;
+				}
+				$index++;
+			}
 
 			$d['id_rnd'] 	= $id_rnd;
 			$d['id_admin']	= $r['id_admin'];
 			$d['id_jenis']	= $r['id_jenis'];
 			$d['no_skki']	= $r['no_skki'];
+			$d['no_nota']	= $r['no_nota'];
+			$d['prk']		= $dd;
 			$d['uraian']	= $r['uraian'];
 			$d['tgl_dibuat']= $r['tgl_dibuat'];
 			$d['nilai_rab']	= $r['nilai_rab'];
+			$d['saldo']		= $saldo;
 			$d['status_kontrak']	= $r['status_kontrak'];
 			$d['status_pembayaran'] = $r['status_pembayaran'];
 
 			// kontrak
-			// $d['no_smartone'] = 
+			$d['no_smartone'] = $kontrak->no_smartone;
+			$d['nama_vendor'] = $kontrak->nama_vendor;
+			$d['tgl_akhir_kontrak'] = $kontrak->tgl_akhir;
+			$d['no_spk'] = $kontrak->no_spk;
+			$d['keterangan'] = $kontrak->keterangan;
 
+			// pembayaran
+
+			$d['id_pembayaran'] = $pembayaran->id_pembayaran;
+			$d['r_100'] = $pembayaran->r_100;
+			$d['r_95'] = $pembayaran->r_95;
+			$d['r_5'] = $pembayaran->r_5;
+			$d['n_100'] = $pembayaran->n_100;
+			$d['n_95'] = $pembayaran->n_95;
+			$d['n_5'] = $pembayaran->n_5;
+			$d['status'] = $pembayaran->status;
+			$d['total'] = $total;
+
+			$result[] = $d;
 
 		}
-		die();
+
+		return $result;
 	}
 
 	// function for add data

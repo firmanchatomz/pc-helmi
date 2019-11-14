@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Export Data Ke Excel Dengan PHP - www.malasngoding.com</title>
+	<title>Laporan Monitoring</title>
 </head>
 <body>
-<!-- 	<style type="text/css">
+	<style type="text/css">
 	body{
 		font-family: sans-serif;
 	}
@@ -25,7 +25,10 @@
 		text-decoration: none;
 		border-radius: 2px;
 	}
-	</style> -->
+	.text-center{
+		text-align: center;
+	}
+	</style>
 
 	<?php
 	header("Content-type: application/vnd-ms-excel");
@@ -33,76 +36,106 @@
 	?>
 
 	<center>
-		<h1>Export Data Ke Excel Dengan PHP <br/> www.malasngoding.com</h1>
+		<h1>Laporan Monitoring</h1>
 	</center>
 
-	<table border="1">
+	<table border="1" class="text-center">
 		<tr>
-			<th>No</th>
-			<th>Nama Pegawai</th>
-			<th>Alamat</th>
-			<th>No.Telp</th>
+			<th colspan="13">RAB DAN NOTA DINAS PENGADAAN</th>
+			<th rowspan="3">SALDO SKKI (PAGU VS RAB)</th>
+			<th colspan="4">KONTRAK / SPK</th>
+			<th colspan="2">MASA KONTRAK</th>
+			<th rowspan="3">NILAI KONTRAK (RP)</th>
+			<th rowspan="3">USER</th>
+			<th rowspan="3">SALDO SKKI (PAGU VS SPK)</th>
+			<th rowspan="3">KETERANGAN PROGRESS PEKERJAAN</th>
+			<th colspan="7">PEMBAYARAN</th>
+			<th rowspan="3">USER</th>
+			<th rowspan="3">STATUS</th>
 		</tr>
 		<tr>
-			<td>1</td>
-			<td>Sulaiman</td>
-			<td>Jakarta</td>
-			<td>0829121223</td>
+			<th rowspan="2">NO</th>
+			<th rowspan="2">JENIS</th>
+			<th rowspan="2">NO SKKI / SKKO</th>
+			<th rowspan="2">PRK 1</th>
+			<th rowspan="2">PRK 2</th>
+			<th rowspan="2">PRK 3</th>
+			<th rowspan="2">PRK 4</th>
+			<th rowspan="2">PRK 5</th>
+			<th rowspan="2">NO NOTA DINAS</th>
+			<th rowspan="2">URAIAN / JENIS PEKERJAAN</th>
+			<th rowspan="2">TANGGAL</th>	
+			<th rowspan="2">USER / DIREKSI</th>	
+			<th rowspan="2">NILAI RAB</th>	
+			<th rowspan="2">NO SMARTONE</th>	
+			<th rowspan="2">NOMOR SPK</th>	
+			<th rowspan="2">NAMA VENDOR</th>	
+			<th rowspan="2">URAIAN / JENIS PEKERJAAN</th>
+			<th></th>
+			<th></th>
+			<th colspan="2">REALISASI 100%</th>
+			<th colspan="2">REALISASI 95%</th>
+			<th colspan="2">REALISASI 5%</th>
+			<th rowspan="2">TOTAL</th>
 		</tr>
 		<tr>
-			<td>2</td>
-			<td>Diki Alfarabi Hadi</td>
-			<td>Jakarta</td>
-			<td>08291212211</td>
+			
+			<th>TGL AWAL</th>
+			<th>TGL AKHIR</th>
+			<th>TANGGAL</th>
+			<th>NILAI</th>
+			<th>TANGGAL</th>
+			<th>NILAI</th>
+			<th>TANGGAL</th>
+			<th>NILAI</th>
 		</tr>
-		<tr>
-			<td>3</td>
-			<td>Zakaria</td>
-			<td>Medan</td>
-			<td>0829121223</td>
-		</tr>
-		<tr>
-			<td>4</td>
-			<td>Alvinur</td>
-			<td>Jakarta</td>
-			<td>02133324344</td>
-		</tr>
-		<tr>
-			<td>5</td>
-			<td>Muhammad Rizani</td>
-			<td>Jakarta</td>
-			<td>08231111223</td>
-		</tr>
-		<tr>
-			<td>6</td>
-			<td>Rizaldi Waloni</td>
-			<td>Jakarta</td>
-			<td>027373733</td>
-		</tr>
-		<tr>
-			<td>7</td>
-			<td>Ferdian</td>
-			<td>Jakarta</td>
-			<td>0829121223</td>
-		</tr>
-		<tr>
-			<td>8</td>
-			<td>Fatimah</td>
-			<td>Jakarta</td>
-			<td>23432423423</td>
-		</tr>
-		<tr>
-			<td>9</td>
-			<td>Aminah</td>
-			<td>Jakarta</td>
-			<td>0829234233</td>
-		</tr>
-		<tr>
-			<td>10</td>
-			<td>Jafarudin</td>
-			<td>Jakarta</td>
-			<td>0829239323</td>
-		</tr>
+
+		<?php 
+			$no = 1;
+		 ?>
+		<?php foreach ($rnd as $r): ?>
+			<tr>
+				<td><?= $no++ ?></td>
+				<td><?= $r['id_jenis']?></td>
+				<td><?= $r['no_skki']?></td>
+				<?php foreach ($r['prk'] as $key): ?>
+					<td><?= $key ?></td>
+				<?php endforeach ?>
+				<?php 
+				$sisa = 5 - count($r['prk']);
+				for ($i=0; $i < $sisa; $i++) { 
+					?>
+					<td>-</td>
+					<?php
+				}
+				 ?>
+				<td><?= $r['no_nota']?></td>
+				<td><?= $r['uraian']?></td>
+				<td><?= $r['tgl_dibuat']?></td>
+				<td><?= $admin->nama_user?></td>
+				<td><?= rupiah($r['nilai_rab'])?></td>
+				<td><?= rupiah($r['saldo'])?></td>
+				<td><?= $r['no_smartone']?></td>
+				<td><?= $r['no_spk']?></td>
+				<td><?= $r['nama_vendor']?></td>
+				<td><?= $r['uraian']?></td>
+				<td><?= $r['tgl_dibuat']?></td>
+				<td><?= $r['tgl_akhir_kontrak']?></td>
+				<td><?= rupiah($r['nilai_rab'])?></td>
+				<td><?= $admin->nama_user?></td>
+				<td><?= rupiah($r['saldo'])?></td>
+				<td><?= $r['keterangan']?></td>
+				<td><?= $r['r_100']?></td>
+				<td><?= rupiah($r['n_100'])?></td>
+				<td><?= $r['r_95']?></td>
+				<td><?= rupiah($r['n_95'])?></td>
+				<td><?= $r['r_5']?></td>
+				<td><?= rupiah($r['n_5'])?></td>
+				<td><?= rupiah($r['total'])?></td>
+				<td><?= $admin->nama_user?></td>
+				<td><?= $r['status']?></td>
+			</tr>
+		<?php endforeach ?>
 	</table>
 </body>
 </html>

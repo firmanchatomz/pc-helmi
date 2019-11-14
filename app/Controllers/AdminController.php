@@ -192,7 +192,9 @@ class AdminController extends Controller
 	public function downloadlaporan()
 	{
 		$data['rnd'] = $this->model('admin')->laporan(); 
-		$this->view('pembayaran/excel');
+		$data['admin']		= $this->model('home')->dataadmin();
+		$this->view('pembayaran/excel',$data);
+		$this->redirect('admin/lihatpembayaran');
 	}
 
 // #########################################################################
