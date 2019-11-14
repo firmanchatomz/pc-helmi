@@ -91,6 +91,43 @@ class Admin extends ModelClass
 		return $set;
 	}
 
+	public function laporan($value='')
+	{
+		$this->_db->table('rnd_pengadaan');
+		$this->_db->where("status_kontrak='sudah' AND status_pembayaran='sudah' ");
+		$data = $this->_db->fetch();
+
+		foreach ($data as $r) {
+			$id_rnd = $r['id_rnd'];
+
+			// data kontrak
+			$this->_db->table('kontrak');
+			$this->_db->where("id_rnd='$id_rnd'");
+			$kontrak = $this->_db->fetch('id');
+
+				// data kontrak
+			$this->_db->table('pembayaran');
+			$this->_db->where("id_rnd='$id_rnd'");
+			$pembayaran = $this->_db->fetch('id');
+
+			$d['id_rnd'] 	= $id_rnd;
+			$d['id_admin']	= $r['id_admin'];
+			$d['id_jenis']	= $r['id_jenis'];
+			$d['no_skki']	= $r['no_skki'];
+			$d['uraian']	= $r['uraian'];
+			$d['tgl_dibuat']= $r['tgl_dibuat'];
+			$d['nilai_rab']	= $r['nilai_rab'];
+			$d['status_kontrak']	= $r['status_kontrak'];
+			$d['status_pembayaran'] = $r['status_pembayaran'];
+
+			// kontrak
+			// $d['no_smartone'] = 
+
+
+		}
+		die();
+	}
+
 	// function for add data
 	public function create($value='')
 	{

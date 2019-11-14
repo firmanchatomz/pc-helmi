@@ -189,6 +189,12 @@ class AdminController extends Controller
 		$this->popup('Data Anggota Keluarga berhasil terhapus','admin/detailrnd/'.$no_rnd);
 	}
 
+	public function downloadlaporan()
+	{
+		$data['rnd'] = $this->model('admin')->laporan(); 
+		$this->view('pembayaran/excel');
+	}
+
 // #########################################################################
 	
 // #########################################################################

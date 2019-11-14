@@ -4,6 +4,8 @@
       <?php if ($rnd): ?>
         <header class="mb-3">
           <a class="btn btn-primary" href="<?= base_url('admin/tambahpembayaran') ?>">Tambah Pembayaran</a>
+          <a href="<?= base_url('admin/downloadlaporan') ?>" class="btn btn-success btn-sm">Download Laporan</a>
+
         </header>
       <?php endif ?>
       <div class="table-responsive">
