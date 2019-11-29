@@ -122,7 +122,7 @@ class AdminController extends Controller
 		if ($save) {
 			$this->popup('Data berhasil tersimpan','admin/lihatkontrak');
 		} else {
-			$this->popup('Data Gagal tersimpan','admin/tambahkontrak');
+			$this->redirect('admin/tambahkontrak');
 		}
 	}
 
@@ -247,6 +247,13 @@ class AdminController extends Controller
 	 	$this->adminpage('Administrator/ubahakun',$data);
 	}
 
+
+	public function tambahakun($value='')
+	{
+		$data['user']		= $this->model('home')->datauser();
+	 	$this->adminpage('Administrator/tambahakun',$data);
+	}
+
 	public function prosesubahakun($value='')
 	{
 		$cek = $this->model('admin')->updateakun();
@@ -255,6 +262,13 @@ class AdminController extends Controller
 		} else {
 			$this->popup('Maaf, password tidak sama','admin/ubahakun');
 		}
+		
+	}
+
+	public function simpanakun($value='')
+	{
+		$this->model('admin')->simpanakun();
+		$this->redirect('admin/tambahakun');
 		
 	}
 

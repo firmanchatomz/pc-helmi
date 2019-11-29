@@ -15,7 +15,8 @@
 function rupiah($angka)
 {
 	$hasil_rupiah = "Rp " . number_format($angka,2,',','.');
-	return $hasil_rupiah;
+	$hasil_rupiah	= explode(',', $hasil_rupiah);
+	return $hasil_rupiah[0];
 }
 
 ## merubah angka menjadi format teks dalam angka bilangan mata uang

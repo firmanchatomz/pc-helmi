@@ -1,6 +1,7 @@
 <div class="container-fluid my-3">
 		<form method="post" action="<?= base_url('admin/simpankontrak') ?>">
 	<h4 class="text-capitalize">Tambah Data Kontrak</h4><hr>
+	<?= show_alert() ?>
 	<div class="row">
 		<div class="col-md-4">
 			<div class="form-group">

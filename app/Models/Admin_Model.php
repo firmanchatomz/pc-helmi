@@ -81,6 +81,22 @@ class Admin extends ModelClass
 		return TRUE;
 	}
 
+	public function simpanakun($value='')
+	{
+		// get user
+
+		$password 		= $_POST['password'];
+		$d['id_user'] = $_POST['id_user'];
+		$d['nama'] 		= $_POST['nama'];
+		$d['username']	= $_POST['username'];
+		$d['password'] 	= password_hash($password, PASSWORD_DEFAULT);
+
+		create_alert('berhasil','AKun baru sudah ditambahkan','success');
+
+		$this->_db->table('admin');
+		return $this->_db->insert($d);
+	}
+
 	public function setfileimage($value='')
 	{
 		$set = ['post' => 'logo',

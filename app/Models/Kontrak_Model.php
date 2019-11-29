@@ -64,6 +64,18 @@ class Kontrak extends ModelClass
 
 	public function createkontrak($value='')
 	{
+
+		$no_smartone 	= $_POST['no_smartone'];
+
+		// cek no smartone ada atau tidaknya
+		$this->_db->table('kontrak');
+		$this->_db->where("no_smartone = '$no_smartone'");
+		$cek = $this->_db->fetch('id');
+
+		if ($cek) {
+			create_alert('gagal','Maaf, No smartone Sudah ada');
+			return FALSE;
+		}
 		$id_rnd 		= $_POST['id_rnd']; 
 
 		// ubah status kontrak
@@ -73,7 +85,7 @@ class Kontrak extends ModelClass
 		$this->_db->update($dd,$id_rnd);
 
 		$d['id_rnd'] = $id_rnd;
-		$d['no_smartone'] = $_POST['no_smartone'];
+		$d['no_smartone'] = $no_smartone;
 		$d['no_spk'] = $_POST['no_spk'];
 		$d['nama_vendor'] = $_POST['nama_vendor'];
 		$d['tgl_akhir'] = $_POST['tgl_akhir'];

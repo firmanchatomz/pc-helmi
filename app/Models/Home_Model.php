@@ -26,6 +26,12 @@ class Home extends ModelClass
 		return $this->_db->fetchjoin('id');
 	}
 
+	public function datauser()
+	{
+		$this->_db->table('user');
+		return $this->_db->fetch();
+	}
+
 	public function chart($value='')
 	{
 		// $this->_db->table('ktp');

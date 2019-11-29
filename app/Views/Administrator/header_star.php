@@ -74,6 +74,9 @@
               <a class="dropdown-item">
                 Menu Admin
               </a>
+              <a class="dropdown-item" href="<?= base_url('admin/tambahakun') ?>">
+                 <i class="menu-icon mdi mdi-account-plus"></i> Tambah Akun
+              </a>
               <a class="dropdown-item" href="<?= base_url('admin/ubahakun') ?>">
                  <i class="menu-icon mdi mdi-account-outline"></i> Ubah Akun
               </a>
