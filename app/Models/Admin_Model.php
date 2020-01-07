@@ -117,6 +117,7 @@ class Admin extends ModelClass
 		$saldo = $this->_db->fetch('id');
 
 		$saldo = $saldo->saldo;
+
 		foreach ($data as $r) {
 			$id_rnd = $r['id_rnd'];
 			$saldo = $saldo - $r['nilai_rab'];
@@ -146,9 +147,13 @@ class Admin extends ModelClass
 				$index++;
 			}
 
+			$this->_db->table('jenis');
+			$jenis = $this->_db->fetchid($r['id_jenis']);
+
+
 			$d['id_rnd'] 	= $id_rnd;
 			$d['id_admin']	= $r['id_admin'];
-			$d['id_jenis']	= $r['id_jenis'];
+			$d['id_jenis']	= $jenis->nama_jenis;
 			$d['no_skki']	= $r['no_skki'];
 			$d['no_nota']	= $r['no_nota'];
 			$d['prk']		= $dd;
@@ -177,6 +182,8 @@ class Admin extends ModelClass
 			$d['n_5'] = $pembayaran->n_5;
 			$d['status'] = $pembayaran->status;
 			$d['total'] = $total;
+
+			$dd 	= null;
 
 			$result[] = $d;
 

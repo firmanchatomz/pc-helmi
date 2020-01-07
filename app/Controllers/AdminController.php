@@ -194,7 +194,6 @@ class AdminController extends Controller
 		$data['rnd'] = $this->model('admin')->laporan(); 
 		$data['admin']		= $this->model('home')->dataadmin();
 		$this->view('pembayaran/excel',$data);
-		$this->redirect('admin/lihatpembayaran');
 	}
 
 // #########################################################################
